@@ -15,7 +15,6 @@
     --rojo: #993921;
     --azul-claro: #f0f8ff;
     --verde: #2e7d5e;
-    --morado: #5c3d8f;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +26,7 @@
     min-height: 100vh;
   }
 
-  /* ── HEADER ── */
+  /* HEADER */
   .header {
     background: var(--azul-oscuro);
     border-radius: 16px;
@@ -35,11 +34,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     flex-wrap: wrap;
     gap: 10px;
   }
-  .header-left { display: flex; flex-direction: column; gap: 2px; }
   .header-badge {
     background: var(--naranja);
     color: white;
@@ -50,346 +48,245 @@
     letter-spacing: 0.8px;
     text-transform: uppercase;
     width: fit-content;
+    margin-bottom: 4px;
   }
-  .header h1 {
-    font-family: 'Fredoka One', cursive;
-    color: var(--amarillo);
-    font-size: 20px;
-    line-height: 1.2;
-  }
-  .header-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-  }
-  .puntos-badge {
-    background: var(--amarillo);
-    color: var(--azul-oscuro);
-    font-weight: 900;
-    font-size: 13px;
-    padding: 5px 14px;
-    border-radius: 20px;
-  }
-  .header-sub {
-    color: rgba(255,255,255,0.65);
-    font-size: 11px;
-    font-weight: 600;
-  }
+  .header h1 { font-family: 'Fredoka One', cursive; color: var(--amarillo); font-size: 19px; line-height: 1.2; }
+  .puntos-badge { background: var(--amarillo); color: var(--azul-oscuro); font-weight: 900; font-size: 13px; padding: 5px 14px; border-radius: 20px; }
+  .header-sub { color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 600; margin-top: 3px; }
 
-  /* ── INSTRUCCIONES ── */
+  /* INSTRUCCIONES */
   .instrucciones {
     background: white;
     border-left: 5px solid var(--naranja);
     border-radius: 10px;
-    padding: 12px 18px;
-    margin-bottom: 16px;
-    font-size: 13.5px;
+    padding: 11px 16px;
+    margin-bottom: 14px;
+    font-size: 14px;
     color: var(--azul-oscuro);
     font-weight: 700;
     line-height: 1.6;
   }
   .instrucciones span { color: var(--naranja); }
 
-  /* ── CAPTURE AREA ── */
+  /* PROGRESO */
+  .progreso-barra { height: 6px; background: #dde4ea; border-radius: 3px; margin-bottom: 6px; overflow: hidden; }
+  .progreso-fill { height: 100%; background: linear-gradient(90deg, var(--naranja), var(--amarillo)); border-radius: 3px; transition: width 0.4s; width: 0%; }
+  .progreso-label { font-size: 11px; font-weight: 800; color: #999; text-align: right; margin-bottom: 12px; }
+
+  /* CAPTURE AREA */
   #captureArea {
     background: white;
     border-radius: 16px;
-    padding: 20px;
+    padding: 18px 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   }
 
-  /* ── WATERMARK HEADER inside capture ── */
   .capture-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 3px solid var(--naranja);
     padding-bottom: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
-  .capture-header h2 {
-    font-family: 'Fredoka One', cursive;
-    color: var(--azul-oscuro);
-    font-size: 17px;
-  }
-  .capture-header .meta {
-    font-size: 11px;
-    color: #888;
-    font-weight: 700;
-    text-align: right;
-    line-height: 1.5;
-  }
-  .capture-header .emoji-big { font-size: 32px; }
+  .capture-header h2 { font-family: 'Fredoka One', cursive; color: var(--azul-oscuro); font-size: 16px; }
+  .capture-meta { font-size: 10px; color: #aaa; font-weight: 700; text-align: right; line-height: 1.5; }
 
-  /* ── NOMBRE FIELD ── */
-  .nombre-row {
-    display: flex;
-    gap: 14px;
-    margin-bottom: 18px;
-    flex-wrap: wrap;
-  }
-  .campo-label {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    flex: 1;
-    min-width: 180px;
-  }
-  .campo-label label {
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--azul-oscuro);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+  /* DATOS */
+  .nombre-row { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .campo-label { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 160px; }
+  .campo-label label { font-size: 11px; font-weight: 800; color: var(--azul-oscuro); text-transform: uppercase; letter-spacing: 0.5px; }
   .campo-label input {
-    border: 2px solid #dde4ea;
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--azul-oscuro);
-    outline: none;
-    transition: border-color 0.2s;
+    border: 2px solid #dde4ea; border-radius: 8px; padding: 8px 12px;
+    font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700;
+    color: var(--azul-oscuro); outline: none; transition: border-color 0.2s; background: white;
   }
   .campo-label input:focus { border-color: var(--naranja); }
 
-  /* ── GRID DE SECCIONES ── */
-  .organizer-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
+  /* CENTRO */
+  .centro {
+    background: var(--azul-oscuro); border-radius: 12px;
+    padding: 12px 18px; display: flex; align-items: center;
+    gap: 12px; margin-bottom: 14px;
   }
+  .centro h2 { font-family: 'Fredoka One', cursive; color: var(--amarillo); font-size: 20px; }
+  .centro p { color: rgba(255,255,255,0.75); font-size: 12px; font-weight: 600; }
 
-  /* ── SECCIÓN CARD ── */
-  .seccion {
-    border-radius: 14px;
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border: 2px solid transparent;
-  }
-  .seccion-1 { background: #fff5ee; border-color: var(--naranja); }
-  .seccion-2 { background: #eef7f1; border-color: var(--verde); }
-  .seccion-3 { background: #fffbea; border-color: var(--amarillo); }
-  .seccion-4 { background: #f0f4ff; border-color: var(--azul-oscuro); }
+  /* GRID */
+  .organizer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-  .seccion-titulo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .seccion-num {
-    width: 28px; height: 28px;
-    border-radius: 50%;
+  /* SECCIÓN */
+  .seccion { border-radius: 14px; padding: 14px; border: 2px solid; display: flex; flex-direction: column; gap: 8px; }
+  .s1 { background: #fff5ee; border-color: var(--naranja); }
+  .s2 { background: #eef7f1; border-color: var(--verde); }
+  .s3 { background: #fffbea; border-color: #c49a00; }
+  .s4 { background: #eef3ff; border-color: var(--azul-oscuro); }
+
+  .sec-head { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+  .sec-num {
+    width: 28px; height: 28px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Fredoka One', cursive;
-    font-size: 15px;
-    color: white;
-    flex-shrink: 0;
+    font-family: 'Fredoka One', cursive; font-size: 15px; color: white; flex-shrink: 0;
   }
-  .n1 { background: var(--naranja); }
-  .n2 { background: var(--verde); }
-  .n3 { background: #c49a00; }
-  .n4 { background: var(--azul-oscuro); }
+  .n1{background:var(--naranja);} .n2{background:var(--verde);} .n3{background:#c49a00;} .n4{background:var(--azul-oscuro);}
+  .sec-head h3 { font-family: 'Fredoka One', cursive; font-size: 14px; line-height: 1.2; }
+  .c1{color:var(--naranja);} .c2{color:var(--verde);} .c3{color:#a07800;} .c4{color:var(--azul-oscuro);}
 
-  .seccion-titulo h3 {
-    font-family: 'Fredoka One', cursive;
-    font-size: 14px;
-    line-height: 1.2;
-  }
-  .c1 h3 { color: var(--naranja); }
-  .c2 h3 { color: var(--verde); }
-  .c3 h3 { color: #a07800; }
-  .c4 h3 { color: var(--azul-oscuro); }
-
-  .seccion-pregunta {
-    font-size: 12px;
-    font-weight: 700;
-    color: #555;
-    line-height: 1.4;
-    padding: 6px 10px;
-    background: rgba(255,255,255,0.6);
-    border-radius: 6px;
+  .pista {
+    background: rgba(255,255,255,0.75);
+    border-radius: 8px; padding: 7px 10px;
+    font-size: 12px; color: #555; font-weight: 700; line-height: 1.5;
   }
 
-  /* ── PUNTOS DENTRO DE CADA SECCIÓN ── */
-  .punto-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
+  /* ── SECCIÓN 1: parejas de conexión ── */
+  .parejas-layout { display: flex; gap: 10px; align-items: flex-start; }
+  .col-micro { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+  .col-enferm { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .micro-chip {
+    background: var(--naranja); color: white;
+    font-size: 12px; font-weight: 800;
+    padding: 7px 10px; border-radius: 8px;
+    white-space: nowrap; text-align: center;
+    height: 38px; display: flex; align-items: center; justify-content: center;
   }
-  .punto-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    margin-top: 10px;
-    flex-shrink: 0;
-  }
-  .d1 { background: var(--naranja); }
-  .d2 { background: var(--verde); }
-  .d3 { background: #c49a00; }
-  .d4 { background: var(--azul-oscuro); }
+  .flecha-col { display: flex; flex-direction: column; gap: 6px; align-items: center; padding-top: 0; }
+  .flecha { font-size: 16px; height: 38px; display: flex; align-items: center; color: #aaa; }
 
-  .punto-row textarea {
-    flex: 1;
-    border: 1.5px solid #dde4ea;
-    border-radius: 8px;
-    padding: 7px 10px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--azul-oscuro);
-    resize: none;
-    outline: none;
-    transition: border-color 0.2s;
-    line-height: 1.4;
-    min-height: 38px;
-    background: white;
+  .enferm-select {
+    height: 38px;
+    border: 2px solid #dde4ea; border-radius: 8px;
+    padding: 0 10px;
+    font-family: 'Nunito', sans-serif; font-size: 12.5px; font-weight: 700;
+    color: var(--azul-oscuro); background: white;
+    outline: none; transition: border-color 0.2s;
+    cursor: pointer; width: 100%;
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23244b5a'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 18px;
+    padding-right: 30px;
   }
-  .punto-row textarea:focus { border-color: var(--naranja); }
-  .punto-row textarea::placeholder { color: #b0bec5; font-style: italic; }
+  .enferm-select:focus { border-color: var(--naranja); }
+  .enferm-select.correcto { border-color: var(--verde); background-color: #eafaf1; color: var(--verde); }
+  .enferm-select.incorrecto { border-color: var(--rojo); background-color: #fff0ee; color: var(--rojo); }
 
-  /* ── SECCIÓN ESPECIAL: MAPA CENTRAL ── */
-  .centro-concepto {
-    grid-column: 1 / -1;
-    background: var(--azul-oscuro);
-    border-radius: 14px;
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 2px;
+  /* ── RETROALIMENTACIÓN ── */
+  .retro-box {
+    border-radius: 9px; padding: 8px 12px;
+    font-size: 12px; font-weight: 700; line-height: 1.5;
+    display: none;
   }
-  .centro-concepto .emoji { font-size: 36px; }
-  .centro-concepto h2 {
-    font-family: 'Fredoka One', cursive;
-    color: var(--amarillo);
-    font-size: 22px;
-  }
-  .centro-concepto p {
-    color: rgba(255,255,255,0.7);
-    font-size: 12px;
-    font-weight: 600;
-  }
+  .retro-box.ok  { background: #eafaf1; border: 2px solid var(--verde); color: #1e7e48; display: flex; align-items: flex-start; gap: 6px; }
+  .retro-box.mal { background: #fff0ee; border: 2px solid var(--rojo);  color: var(--rojo); display: flex; align-items: flex-start; gap: 6px; }
 
-  /* ── HIDDEN CAPTURE DIV ── */
-  #hiddenCapture {
-    position: fixed;
-    top: -9999px;
-    left: -9999px;
-    width: 900px;
-    background: white;
-    padding: 24px;
-    font-family: 'Nunito', 'Segoe UI', sans-serif;
-    z-index: -1;
+  .btn-verificar {
+    border: none; border-radius: 9px; padding: 8px 16px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12.5px;
+    cursor: pointer; transition: all 0.2s; align-self: flex-start;
   }
+  .btn-verificar.naranja { background: var(--naranja); color: white; }
+  .btn-verificar.naranja:hover { background: var(--rojo); }
+  .btn-verificar.verde  { background: var(--verde); color: white; }
+  .btn-verificar.verde:hover  { background: #1e5e3e; }
+  .btn-verificar.azul   { background: var(--azul-oscuro); color: white; }
+  .btn-verificar.azul:hover   { background: #162e38; }
+  .btn-intentar {
+    border: none; border-radius: 9px; padding: 6px 14px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px;
+    cursor: pointer; background: white; color: var(--naranja);
+    border: 2px solid var(--naranja); transition: all 0.2s; margin-left: 6px;
+  }
+  .btn-intentar:hover { background: var(--naranja); color: white; }
 
-  /* ── FOOTER BUTTONS ── */
-  .footer-btns {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 16px;
-    flex-wrap: wrap;
+  /* ── SECCIÓN 2: opciones táctiles ── */
+  .opciones-img { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .op-img-btn {
+    border: 2.5px solid #dde4ea; border-radius: 10px;
+    padding: 8px 10px; display: flex; align-items: center; gap: 7px;
+    cursor: pointer; background: white;
+    font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700;
+    color: var(--azul-oscuro); transition: all 0.2s; text-align: left;
   }
-  .btn-descargar {
-    background: var(--naranja);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 28px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex; align-items: center; gap: 8px;
+  .op-img-btn:hover { border-color: var(--verde); background: rgba(46,125,94,0.05); }
+  .op-img-btn.sel { border-color: var(--verde); background: rgba(46,125,94,0.1); color: var(--verde); }
+  .op-img-btn .ico { font-size: 18px; flex-shrink: 0; }
+
+  /* ── SECCIÓN 3: completar oraciones ── */
+  .fila-resp { display: flex; align-items: center; gap: 8px; }
+  .fila-etiqueta {
+    font-size: 12px; font-weight: 800; color: white;
+    padding: 4px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+  }
+  .et3 { background: #c49a00; }
+  .fila-resp input[type="text"] {
+    flex: 1; border: 2px solid #dde4ea; border-radius: 8px;
+    padding: 7px 11px; font-family: 'Nunito', sans-serif;
+    font-size: 13px; font-weight: 700; color: var(--azul-oscuro);
+    outline: none; transition: border-color 0.2s; background: white;
+  }
+  .fila-resp input[type="text"]:focus { border-color: #c49a00; }
+  .fila-resp input[type="text"].correcto { border-color: var(--verde); background: #eafaf1; color: var(--verde); }
+  .fila-resp input[type="text"].incorrecto { border-color: var(--rojo); background: #fff0ee; color: var(--rojo); }
+  .fila-resp input[type="text"]::placeholder { color: #c0cdd5; font-style: italic; font-weight: 600; font-size: 12px; }
+
+  /* ── SECCIÓN 4: Verdadero / Falso ── */
+  .vf-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .vf-enunciado { font-size: 12.5px; font-weight: 700; color: var(--azul-oscuro); flex: 1; min-width: 160px; line-height: 1.4; }
+  .vf-btns { display: flex; gap: 6px; }
+  .vf-btn {
+    border: 2px solid #dde4ea; border-radius: 8px;
+    padding: 5px 12px; font-family: 'Nunito', sans-serif;
+    font-size: 12px; font-weight: 800; cursor: pointer;
+    background: white; transition: all 0.2s; color: #555;
+  }
+  .vf-btn:hover { border-color: var(--azul-oscuro); color: var(--azul-oscuro); }
+  .vf-btn.sel-v { background: #eafaf1; border-color: var(--verde); color: var(--verde); }
+  .vf-btn.sel-f { background: #fff0ee; border-color: var(--rojo); color: var(--rojo); }
+  .vf-btn.correcto-final { background: #eafaf1 !important; border-color: var(--verde) !important; color: var(--verde) !important; }
+  .vf-btn.incorrecto-final { background: #fff0ee !important; border-color: var(--rojo) !important; color: var(--rojo) !important; }
+
+  /* FIRMA */
+  .firma-cap {
+    margin-top: 14px; padding-top: 10px; border-top: 2px solid #eee;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .firma-cap .colegio { font-size: 10px; color: #bbb; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .firma-cap .pts { background: var(--naranja); color: white; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
+
+  /* BOTONES FOOTER */
+  .footer-btns { display: flex; gap: 12px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+  .btn-dl {
+    background: var(--naranja); color: white; border: none;
+    border-radius: 12px; padding: 12px 26px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
+    cursor: pointer; display: flex; align-items: center; gap: 8px;
     transition: background 0.2s, transform 0.15s;
     box-shadow: 0 4px 14px rgba(219,96,21,0.3);
   }
-  .btn-descargar:hover { background: var(--rojo); transform: translateY(-2px); }
-  .btn-limpiar {
-    background: white;
-    color: var(--azul-oscuro);
-    border: 2px solid var(--azul-oscuro);
-    border-radius: 12px;
-    padding: 12px 22px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
+  .btn-dl:hover { background: var(--rojo); transform: translateY(-2px); }
+  .btn-cl {
+    background: white; color: var(--azul-oscuro);
+    border: 2px solid var(--azul-oscuro); border-radius: 12px;
+    padding: 12px 20px; font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 14px; cursor: pointer; transition: all 0.2s;
   }
-  .btn-limpiar:hover { background: var(--azul-oscuro); color: white; }
+  .btn-cl:hover { background: var(--azul-oscuro); color: white; }
 
-  /* ── TOAST ── */
   .toast {
-    position: fixed;
-    bottom: 24px; right: 24px;
-    background: var(--azul-oscuro);
-    color: var(--amarillo);
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 14px;
-    padding: 12px 22px;
-    border-radius: 12px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s;
-    z-index: 999;
-    pointer-events: none;
+    position: fixed; bottom: 22px; right: 22px;
+    background: var(--azul-oscuro); color: var(--amarillo);
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
+    padding: 11px 20px; border-radius: 12px;
+    opacity: 0; transform: translateY(16px);
+    transition: all 0.3s; z-index: 999; pointer-events: none;
   }
   .toast.show { opacity: 1; transform: translateY(0); }
 
-  /* ── PROGRESS ── */
-  .progreso-barra {
-    height: 6px;
-    background: #e0e7ef;
-    border-radius: 3px;
-    margin-bottom: 16px;
-    overflow: hidden;
-  }
-  .progreso-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--naranja), var(--amarillo));
-    border-radius: 3px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
-  .progreso-label {
-    font-size: 11px;
-    font-weight: 800;
-    color: #888;
-    text-align: right;
-    margin-top: -14px;
-    margin-bottom: 10px;
-  }
-
-  /* ── FIRMA ── */
-  .firma-capture {
-    margin-top: 14px;
-    padding-top: 10px;
-    border-top: 2px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .firma-capture .colegio {
-    font-size: 10px;
-    color: #aaa;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .firma-capture .puntos-total {
-    background: var(--naranja);
-    color: white;
-    font-size: 11px;
-    font-weight: 800;
-    padding: 4px 12px;
-    border-radius: 20px;
+  #hiddenCapture {
+    position: fixed; top: -9999px; left: -9999px;
+    width: 860px; background: white; padding: 22px;
+    font-family: 'Nunito','Segoe UI',sans-serif; z-index: -1;
   }
 </style>
 </head>
@@ -397,348 +294,527 @@
 
 <!-- HEADER -->
 <div class="header">
-  <div class="header-left">
+  <div>
     <div class="header-badge">📋 Actividad · 4° Primaria · Ciencias Naturales</div>
     <h1>Organizador Gráfico<br>Enfermedades Infecciosas</h1>
-  </div>
-  <div class="header-right">
-    <div class="puntos-badge">⭐ Vale 4 puntos</div>
     <div class="header-sub">Lección 11 · Plan Regular 2026</div>
   </div>
+  <div class="puntos-badge">⭐ Vale 4 puntos</div>
 </div>
 
 <!-- INSTRUCCIONES -->
 <div class="instrucciones">
-  📌 <span>Instrucciones:</span> Completa los cuatro apartados del organizador con tus propias palabras. Cada sección vale <span>1 punto</span>. Cuando termines, presiona <span>"Descargar mi actividad"</span> para guardar tu trabajo como imagen.
+  📌 <span>¿Cómo hacerlo?</span> Completa cada sección y toca el botón <span>✔ Verificar</span> para saber si tu respuesta está correcta. ¡Cada sección vale <span>1 punto</span>! Cuando termines, toca <span>"Guardar mi actividad"</span> 📥
 </div>
 
-<!-- BARRA DE PROGRESO -->
-<div class="progreso-barra"><div class="progreso-fill" id="progresoFill"></div></div>
-<div class="progreso-label" id="progresoLabel">0 / 8 campos completados</div>
+<!-- PROGRESO -->
+<div class="progreso-barra"><div class="progreso-fill" id="pFill"></div></div>
+<div class="progreso-label" id="pLabel">🚀 ¡Empieza aquí!</div>
 
-<!-- ÁREA CAPTURADA -->
+<!-- ÁREA DE CAPTURA -->
 <div id="captureArea">
 
   <div class="capture-header">
     <div>
-      <div class="header-badge" style="background:var(--naranja);color:white;font-size:9px;font-weight:800;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.8px;display:inline-block;margin-bottom:4px;">Ciencias Naturales · 4° Primaria · Lección 11</div>
+      <div style="background:var(--naranja);color:white;font-size:9px;font-weight:800;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.8px;display:inline-block;margin-bottom:3px;">Ciencias Naturales · 4° Primaria · Lección 11</div>
       <h2>Organizador Gráfico: Enfermedades Infecciosas</h2>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
-      <span class="emoji-big">🦠</span>
-      <div class="meta">Plan Regular 2026<br>Colegio Escolaris</div>
+      <span style="font-size:28px;">🦠</span>
+      <div class="capture-meta">Plan Regular 2026<br>Colegio Escolaris</div>
     </div>
   </div>
 
-  <!-- NOMBRE / FECHA -->
+  <!-- DATOS -->
   <div class="nombre-row">
     <div class="campo-label">
-      <label>Nombre del estudiante</label>
-      <input type="text" id="nombreEstudiante" placeholder="Escribe tu nombre completo..." oninput="actualizarProgreso()">
+      <label>👤 Mi nombre</label>
+      <input type="text" id="nombreEst" placeholder="Escribe tu nombre aquí..." oninput="actualizarProgreso()">
     </div>
-    <div class="campo-label" style="max-width:160px;">
-      <label>Fecha</label>
-      <input type="text" id="fechaEstudiante" placeholder="dd/mm/aaaa" oninput="actualizarProgreso()">
+    <div class="campo-label" style="max-width:150px;">
+      <label>📅 Fecha</label>
+      <input type="text" id="fechaEst" placeholder="dd/mm/aaaa" oninput="actualizarProgreso()">
     </div>
-    <div class="campo-label" style="max-width:130px;">
-      <label>Grado</label>
-      <input type="text" id="gradoEstudiante" value="4° Primaria" readonly style="background:#f0f8ff;color:#888;">
+    <div class="campo-label" style="max-width:120px;">
+      <label>🏫 Grado</label>
+      <input type="text" value="4° Primaria" readonly style="background:#f4f6f8;color:#aaa;cursor:default;">
     </div>
   </div>
 
-  <!-- CONCEPTO CENTRAL -->
-  <div class="centro-concepto">
-    <div class="emoji">🦠</div>
+  <!-- CENTRO -->
+  <div class="centro">
+    <span style="font-size:32px;">🦠</span>
     <div>
       <h2>Enfermedades Infecciosas</h2>
-      <p>Enfermedades causadas por microorganismos que pueden transmitirse de persona a persona</p>
+      <p>Son enfermedades causadas por microorganismos muy pequeños que pueden pasar de una persona a otra</p>
     </div>
   </div>
 
-  <!-- GRID 4 SECCIONES -->
+  <!-- GRID -->
   <div class="organizer-grid">
 
-    <!-- SECCIÓN 1: ¿Qué las causa? -->
-    <div class="seccion seccion-1">
-      <div class="seccion-titulo c1">
-        <div class="seccion-num n1">1</div>
-        <h3>¿Quiénes las causan?<br><small style="font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;color:#888;">Tipos de microorganismos</small></h3>
+    <!-- ══ SECCIÓN 1 ══ -->
+    <div class="seccion s1">
+      <div class="sec-head">
+        <div class="sec-num n1">1</div>
+        <h3 class="c1">¿Qué las causa? 🔬</h3>
       </div>
-      <div class="seccion-pregunta">🔬 Menciona los 4 tipos de microorganismos que causan enfermedades infecciosas y escribe un ejemplo de cada uno.</div>
-      <div class="punto-row">
-        <div class="punto-dot d1"></div>
-        <textarea id="s1a" placeholder="Virus → ejemplo: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="pista">💡 <strong>¿Qué hacer?</strong> Cada microorganismo de la izquierda tiene una enfermedad que le pertenece. Usa el menú desplegable de la derecha para elegir la enfermedad correcta de cada uno.</div>
+
+      <div class="parejas-layout">
+        <div class="col-micro">
+          <div class="micro-chip">🔴 Virus</div>
+          <div class="micro-chip">🟠 Bacteria</div>
+          <div class="micro-chip">🟢 Hongo</div>
+          <div class="micro-chip">🦟 Parásito</div>
+        </div>
+        <div class="flecha-col">
+          <div class="flecha">→</div>
+          <div class="flecha">→</div>
+          <div class="flecha">→</div>
+          <div class="flecha">→</div>
+        </div>
+        <div class="col-enferm">
+          <select class="enferm-select" id="s1a" onchange="actualizarProgreso()">
+            <option value="">— elige una enfermedad —</option>
+            <option value="gripe">🤧 Gripe / COVID-19</option>
+            <option value="salmonelosis">🍽️ Salmonelosis</option>
+            <option value="pie">🦶 Pie de atleta</option>
+            <option value="malaria">🦟 Malaria / Dengue</option>
+          </select>
+          <select class="enferm-select" id="s1b" onchange="actualizarProgreso()">
+            <option value="">— elige una enfermedad —</option>
+            <option value="gripe">🤧 Gripe / COVID-19</option>
+            <option value="salmonelosis">🍽️ Salmonelosis</option>
+            <option value="pie">🦶 Pie de atleta</option>
+            <option value="malaria">🦟 Malaria / Dengue</option>
+          </select>
+          <select class="enferm-select" id="s1c" onchange="actualizarProgreso()">
+            <option value="">— elige una enfermedad —</option>
+            <option value="gripe">🤧 Gripe / COVID-19</option>
+            <option value="salmonelosis">🍽️ Salmonelosis</option>
+            <option value="pie">🦶 Pie de atleta</option>
+            <option value="malaria">🦟 Malaria / Dengue</option>
+          </select>
+          <select class="enferm-select" id="s1d" onchange="actualizarProgreso()">
+            <option value="">— elige una enfermedad —</option>
+            <option value="gripe">🤧 Gripe / COVID-19</option>
+            <option value="salmonelosis">🍽️ Salmonelosis</option>
+            <option value="pie">🦶 Pie de atleta</option>
+            <option value="malaria">🦟 Malaria / Dengue</option>
+          </select>
+        </div>
       </div>
-      <div class="punto-row">
-        <div class="punto-dot d1"></div>
-        <textarea id="s1b" placeholder="Bacteria → ejemplo: ..." rows="2" oninput="actualizarProgreso()"></textarea>
-      </div>
-      <div class="punto-row">
-        <div class="punto-dot d1"></div>
-        <textarea id="s1c" placeholder="Hongo → ejemplo: ..." rows="2" oninput="actualizarProgreso()"></textarea>
-      </div>
-      <div class="punto-row">
-        <div class="punto-dot d1"></div>
-        <textarea id="s1d" placeholder="Parásito → ejemplo: ..." rows="2" oninput="actualizarProgreso()"></textarea>
-      </div>
+
+      <button class="btn-verificar naranja" onclick="verificarS1()">✔ Verificar mis respuestas</button>
+      <div class="retro-box" id="retro1"></div>
     </div>
 
-    <!-- SECCIÓN 2: Formas de contagio -->
-    <div class="seccion seccion-2">
-      <div class="seccion-titulo c2">
-        <div class="seccion-num n2">2</div>
-        <h3>¿Cómo se contagian?<br><small style="font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;color:#888;">Vías de transmisión</small></h3>
+    <!-- ══ SECCIÓN 2 ══ -->
+    <div class="seccion s2">
+      <div class="sec-head">
+        <div class="sec-num n2">2</div>
+        <h3 class="c2">¿Cómo se contagian? 📡</h3>
       </div>
-      <div class="seccion-pregunta">📡 Escribe las 4 formas en que las enfermedades infecciosas pueden transmitirse de una persona a otra.</div>
-      <div class="punto-row">
-        <div class="punto-dot d2"></div>
-        <textarea id="s2a" placeholder="Vía 1: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="pista">👆 <strong>¿Qué hacer?</strong> Toca las <strong>4 formas correctas</strong> en que las enfermedades se contagian. ¡Cuidado! Hay 2 opciones que no son correctas.</div>
+
+      <div class="opciones-img" id="s2opciones">
+        <button class="op-img-btn" onclick="toggleOp(this,'s2a')" data-correcto="true"><span class="ico">💨</span> Por el aire (tos / estornudo)</button>
+        <button class="op-img-btn" onclick="toggleOp(this,'s2b')" data-correcto="true"><span class="ico">🤝</span> Tocando a alguien enfermo</button>
+        <button class="op-img-btn" onclick="toggleOp(this,'s2c')" data-correcto="true"><span class="ico">🍽️</span> Comida o agua sucia</button>
+        <button class="op-img-btn" onclick="toggleOp(this,'s2d')" data-correcto="true"><span class="ico">🦟</span> Por un insecto (mosquito)</button>
+        <button class="op-img-btn" onclick="toggleOp(this,'s2e')" data-correcto="false"><span class="ico">☀️</span> Por mirar el sol</button>
+        <button class="op-img-btn" onclick="toggleOp(this,'s2f')" data-correcto="false"><span class="ico">📺</span> Por ver televisión</button>
       </div>
-      <div class="punto-row">
-        <div class="punto-dot d2"></div>
-        <textarea id="s2b" placeholder="Vía 2: ..." rows="2" oninput="actualizarProgreso()"></textarea>
-      </div>
-      <div class="punto-row">
-        <div class="punto-dot d2"></div>
-        <textarea id="s2c" placeholder="Vía 3: ..." rows="2" oninput="actualizarProgreso()"></textarea>
-      </div>
-      <div class="punto-row">
-        <div class="punto-dot d2"></div>
-        <textarea id="s2d" placeholder="Vía 4: ..." rows="2" oninput="actualizarProgreso()"></textarea>
-      </div>
+
+      <button class="btn-verificar verde" onclick="verificarS2()">✔ Verificar mis respuestas</button>
+      <div class="retro-box" id="retro2"></div>
     </div>
 
-    <!-- SECCIÓN 3: Prevención -->
-    <div class="seccion seccion-3">
-      <div class="seccion-titulo c3">
-        <div class="seccion-num n3">3</div>
-        <h3>¿Cómo prevenirlas?<br><small style="font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;color:#888;">Medidas de prevención</small></h3>
+    <!-- ══ SECCIÓN 3 ══ -->
+    <div class="seccion s3">
+      <div class="sec-head">
+        <div class="sec-num n3">3</div>
+        <h3 class="c3">¿Cómo cuidarme? 🛡️</h3>
       </div>
-      <div class="seccion-pregunta">🛡️ Escribe 4 acciones que puedes hacer ANTES de enfermarte para protegerte de enfermedades infecciosas.</div>
-      <div class="punto-row">
-        <div class="punto-dot d3"></div>
-        <textarea id="s3a" placeholder="Acción 1: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="pista">✏️ <strong>¿Qué hacer?</strong> Completa cada oración escribiendo la <strong>palabra que falta</strong> en el espacio en blanco.</div>
+
+      <div class="fila-resp">
+        <span class="fila-etiqueta et3">1</span>
+        <input type="text" id="s3a" placeholder="Lavarme las _____ con agua y jabón." oninput="actualizarProgreso()">
       </div>
-      <div class="punto-row">
-        <div class="punto-dot d3"></div>
-        <textarea id="s3b" placeholder="Acción 2: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="fila-resp">
+        <span class="fila-etiqueta et3">2</span>
+        <input type="text" id="s3b" placeholder="Usar _____ cuando alguien está enfermo." oninput="actualizarProgreso()">
       </div>
-      <div class="punto-row">
-        <div class="punto-dot d3"></div>
-        <textarea id="s3c" placeholder="Acción 3: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="fila-resp">
+        <span class="fila-etiqueta et3">3</span>
+        <input type="text" id="s3c" placeholder="Ponerme mis _____ para protegerme." oninput="actualizarProgreso()">
       </div>
-      <div class="punto-row">
-        <div class="punto-dot d3"></div>
-        <textarea id="s3d" placeholder="Acción 4: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="fila-resp">
+        <span class="fila-etiqueta et3">4</span>
+        <input type="text" id="s3d" placeholder="Si estoy enfermo, quedarme en _____ en casa." oninput="actualizarProgreso()">
       </div>
+
+      <button class="btn-verificar naranja" style="background:#c49a00;" onclick="verificarS3()">✔ Verificar mis respuestas</button>
+      <div class="retro-box" id="retro3"></div>
     </div>
 
-    <!-- SECCIÓN 4: Reflexión personal -->
-    <div class="seccion seccion-4">
-      <div class="seccion-titulo c4">
-        <div class="seccion-num n4">4</div>
-        <h3>Mi reflexión personal<br><small style="font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;color:#888;">Aplicación a mi vida</small></h3>
+    <!-- ══ SECCIÓN 4 ══ -->
+    <div class="seccion s4">
+      <div class="sec-head">
+        <div class="sec-num n4">4</div>
+        <h3 class="c4">¿Verdadero o Falso? ✔️❌</h3>
       </div>
-      <div class="seccion-pregunta">💭 Responde con tus propias palabras estas preguntas de reflexión.</div>
-      <div class="punto-row">
-        <div class="punto-dot d4"></div>
-        <textarea id="s4a" placeholder="¿Qué diferencia hay entre prevención y tratamiento?" rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="pista">👆 <strong>¿Qué hacer?</strong> Lee cada oración y toca <strong>V</strong> si es verdadera o <strong>F</strong> si es falsa.</div>
+
+      <div class="vf-row">
+        <span class="vf-enunciado">La gripe es causada por un virus. 🦠</span>
+        <div class="vf-btns">
+          <button class="vf-btn" onclick="selVF(this,'v','vf1')" data-group="vf1" data-val="v">✔ V</button>
+          <button class="vf-btn" onclick="selVF(this,'f','vf1')" data-group="vf1" data-val="f">✘ F</button>
+        </div>
       </div>
-      <div class="punto-row">
-        <div class="punto-dot d4"></div>
-        <textarea id="s4b" placeholder="¿Por qué los antibióticos no sirven para curar un virus?" rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="vf-row">
+        <span class="vf-enunciado">Los antibióticos curan enfermedades de virus. 💊</span>
+        <div class="vf-btns">
+          <button class="vf-btn" onclick="selVF(this,'v','vf2')" data-group="vf2" data-val="v">✔ V</button>
+          <button class="vf-btn" onclick="selVF(this,'f','vf2')" data-group="vf2" data-val="f">✘ F</button>
+        </div>
       </div>
-      <div class="punto-row">
-        <div class="punto-dot d4"></div>
-        <textarea id="s4c" placeholder="Menciona una medida de prevención que ya practicas en casa." rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="vf-row">
+        <span class="vf-enunciado">Lavarse las manos ayuda a prevenir enfermedades. 🧼</span>
+        <div class="vf-btns">
+          <button class="vf-btn" onclick="selVF(this,'v','vf3')" data-group="vf3" data-val="v">✔ V</button>
+          <button class="vf-btn" onclick="selVF(this,'f','vf3')" data-group="vf3" data-val="f">✘ F</button>
+        </div>
       </div>
-      <div class="punto-row">
-        <div class="punto-dot d4"></div>
-        <textarea id="s4d" placeholder="¿Qué harías si un familiar cercano se enferma de gripe?" rows="2" oninput="actualizarProgreso()"></textarea>
+      <div class="vf-row">
+        <span class="vf-enunciado">El dengue lo transmite un mosquito. 🦟</span>
+        <div class="vf-btns">
+          <button class="vf-btn" onclick="selVF(this,'v','vf4')" data-group="vf4" data-val="v">✔ V</button>
+          <button class="vf-btn" onclick="selVF(this,'f','vf4')" data-group="vf4" data-val="f">✘ F</button>
+        </div>
       </div>
+
+      <button class="btn-verificar azul" onclick="verificarS4()">✔ Verificar mis respuestas</button>
+      <div class="retro-box" id="retro4"></div>
     </div>
 
   </div><!-- end grid -->
 
-  <!-- FIRMA -->
-  <div class="firma-capture">
+  <div class="firma-cap">
     <div class="colegio">SUSY RAMÍREZ · Coordinadora Académica · Colegio Escolaris · Plan Regular 2026</div>
-    <div class="puntos-total">⭐ 4 puntos</div>
+    <div class="pts">⭐ 4 puntos</div>
   </div>
 
 </div><!-- end captureArea -->
 
-<!-- HIDDEN CAPTURE -->
 <div id="hiddenCapture"></div>
 
-<!-- BOTONES -->
 <div class="footer-btns">
-  <button class="btn-descargar" onclick="descargarActividad()">
-    📥 Descargar mi actividad
-  </button>
-  <button class="btn-limpiar" onclick="limpiarFormulario()">
-    🗑️ Limpiar todo
-  </button>
+  <button class="btn-dl" onclick="descargar()">📥 Guardar mi actividad</button>
+  <button class="btn-cl" onclick="limpiar()">🗑️ Limpiar todo</button>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-  // ── PROGRESO ──
-  const camposIds = ['nombreEstudiante','fechaEstudiante',
-    's1a','s1b','s1c','s1d',
-    's2a','s2b','s2c','s2d',
-    's3a','s3b','s3c','s3d',
-    's4a','s4b','s4c','s4d'];
-  const totalCampos = camposIds.length;
+  // ── Estado ──
+  const vfSeleccion = {};
+  const s2sel = {};
+  const s1correctas = { s1a:'gripe', s1b:'salmonelosis', s1c:'pie', s1d:'malaria' };
+  const s3correctas = {
+    s3a: ['manos','manitos'],
+    s3b: ['mascarilla','cubrebocas','tapabocas','mascarillas'],
+    s3c: ['vacunas','vacuna','vacunas'],
+    s3d: ['reposo','cama','casa']
+  };
+  const vfCorrect = { vf1:'v', vf2:'f', vf3:'v', vf4:'v' };
 
-  function actualizarProgreso() {
-    let llenos = 0;
-    camposIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && el.value.trim().length > 2) llenos++;
+  // ── VF ──
+  function selVF(btn, val, group) {
+    document.querySelectorAll(`[data-group="${group}"]`).forEach(b => {
+      b.classList.remove('sel-v','sel-f');
     });
-    const pct = Math.round((llenos / totalCampos) * 100);
-    document.getElementById('progresoFill').style.width = pct + '%';
-    document.getElementById('progresoLabel').textContent = llenos + ' / ' + totalCampos + ' campos completados (' + pct + '%)';
+    btn.classList.add(val === 'v' ? 'sel-v' : 'sel-f');
+    vfSeleccion[group] = val;
+    actualizarProgreso();
+  }
+
+  // ── Opciones S2 ──
+  function toggleOp(btn, id) {
+    btn.classList.toggle('sel');
+    s2sel[id] = btn.classList.contains('sel');
+    actualizarProgreso();
+  }
+
+  // ── VERIFICAR S1 ──
+  function verificarS1() {
+    let correctas = 0;
+    const msgs = {
+      s1a: 'El <strong>Virus</strong> causa la gripe y el COVID-19. Los virus necesitan células vivas para vivir.',
+      s1b: 'La <strong>Bacteria</strong> causa la salmonelosis. Se trata con antibióticos.',
+      s1c: 'El <strong>Hongo</strong> causa el pie de atleta. Vive en lugares húmedos.',
+      s1d: 'El <strong>Parásito</strong> causa la malaria y el dengue. Lo transmiten los mosquitos.'
+    };
+    Object.entries(s1correctas).forEach(([id, resp]) => {
+      const sel = document.getElementById(id);
+      if (sel.value === resp) { sel.className = 'enferm-select correcto'; correctas++; }
+      else { sel.className = 'enferm-select incorrecto'; }
+    });
+    const retro = document.getElementById('retro1');
+    if (correctas === 4) {
+      retro.className = 'retro-box ok';
+      retro.innerHTML = '🎉 ¡Perfecto! Todas correctas. Recuerda: virus→gripe, bacteria→salmonelosis, hongo→pie de atleta, parásito→malaria.';
+    } else {
+      retro.className = 'retro-box mal';
+      retro.innerHTML = `❌ Tienes ${correctas} de 4 correctas. Las marcadas en rojo están incorrectas. <strong>Pista:</strong> ${Object.entries(s1correctas).filter(([id])=> document.getElementById(id).value !== s1correctas[id]).map(([id])=>msgs[id]).join(' / ')} <button class="btn-intentar" onclick="reiniciarS1()">🔄 Intentar de nuevo</button>`;
+    }
+  }
+  function reiniciarS1() {
+    ['s1a','s1b','s1c','s1d'].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = '';
+      el.className = 'enferm-select';
+    });
+    document.getElementById('retro1').className = 'retro-box';
+  }
+
+  // ── VERIFICAR S2 ──
+  function verificarS2() {
+    const correctasIds = ['s2a','s2b','s2c','s2d'];
+    const incorrectasIds = ['s2e','s2f'];
+    const btns = document.querySelectorAll('#s2opciones .op-img-btn');
+    let errores = 0;
+    btns.forEach(btn => {
+      const id = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+      const esCorrecto = btn.dataset.correcto === 'true';
+      const estaSel = s2sel[id];
+      if (esCorrecto && !estaSel) errores++;
+      if (!esCorrecto && estaSel) errores++;
+    });
+    const retro = document.getElementById('retro2');
+    if (errores === 0) {
+      retro.className = 'retro-box ok';
+      retro.innerHTML = '🎉 ¡Excelente! Las 4 formas correctas son: por el aire, contacto directo, comida/agua sucia y por mosquitos. "Por el sol" y "ver televisión" no contagian enfermedades.';
+    } else {
+      retro.className = 'retro-box mal';
+      retro.innerHTML = `❌ Hay ${errores} error(es). Recuerda: hay exactamente <strong>4 formas correctas</strong>. Las enfermedades se contagian por vías reales de contacto con microorganismos. ¿El sol o la tele pueden llevar bacterias o virus? <button class="btn-intentar" onclick="reiniciarS2()">🔄 Intentar de nuevo</button>`;
+    }
+  }
+  function reiniciarS2() {
+    document.querySelectorAll('#s2opciones .op-img-btn').forEach(b => b.classList.remove('sel'));
+    Object.keys(s2sel).forEach(k => delete s2sel[k]);
+    document.getElementById('retro2').className = 'retro-box';
+  }
+
+  // ── VERIFICAR S3 ──
+  function verificarS3() {
+    let correctas = 0;
+    const hints = {
+      s3a: 'manos — Lavarse las <em>manos</em> es la medida más efectiva.',
+      s3b: 'mascarilla — La <em>mascarilla</em> nos protege de las gotitas en el aire.',
+      s3c: 'vacunas — Las <em>vacunas</em> preparan al cuerpo antes de que llegue el virus.',
+      s3d: 'reposo — Guardar <em>reposo</em> en casa evita contagiar a otros.'
+    };
+    let errMsg = [];
+    Object.entries(s3correctas).forEach(([id, respuestas]) => {
+      const el = document.getElementById(id);
+      const val = el.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      const ok = respuestas.some(r => val.includes(r.normalize('NFD').replace(/[\u0300-\u036f]/g,'')));
+      if (ok) { el.className = el.className.replace('incorrecto','') + ' correcto'; correctas++; }
+      else { el.className = el.className.replace('correcto','') + ' incorrecto'; errMsg.push(hints[id]); }
+    });
+    const retro = document.getElementById('retro3');
+    if (correctas === 4) {
+      retro.className = 'retro-box ok';
+      retro.innerHTML = '🎉 ¡Muy bien! Lavarme las <strong>manos</strong>, usar <strong>mascarilla</strong>, ponerme mis <strong>vacunas</strong> y guardar <strong>reposo</strong> son las respuestas correctas.';
+    } else {
+      retro.className = 'retro-box mal';
+      retro.innerHTML = `❌ ${correctas} de 4 correctas. Revisa las que están en rojo. <strong>Pista:</strong> ${errMsg.join(' · ')} <button class="btn-intentar" onclick="reiniciarS3()">🔄 Intentar de nuevo</button>`;
+    }
+  }
+  function reiniciarS3() {
+    ['s3a','s3b','s3c','s3d'].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = '';
+      el.className = el.className.replace('correcto','').replace('incorrecto','');
+    });
+    document.getElementById('retro3').className = 'retro-box';
+  }
+
+  // ── VERIFICAR S4 ──
+  function verificarS4() {
+    let correctas = 0;
+    const explica = {
+      vf1: 'La gripe SÍ es causada por un virus. ✔ Verdadero.',
+      vf2: 'Los antibióticos NO curan virus, solo bacterias. ✔ Falso.',
+      vf3: 'Lavarse las manos SÍ previene enfermedades. ✔ Verdadero.',
+      vf4: 'El dengue SÍ lo transmite el mosquito. ✔ Verdadero.'
+    };
+    let errMsg = [];
+    Object.entries(vfCorrect).forEach(([group, correcto]) => {
+      const btns = document.querySelectorAll(`[data-group="${group}"]`);
+      const seleccionado = vfSeleccion[group];
+      btns.forEach(b => {
+        b.classList.remove('correcto-final','incorrecto-final');
+        if (b.dataset.val === correcto) b.classList.add('correcto-final');
+        else if (b.dataset.val === seleccionado && seleccionado !== correcto) b.classList.add('incorrecto-final');
+      });
+      if (seleccionado === correcto) correctas++;
+      else errMsg.push(explica[group]);
+    });
+    const retro = document.getElementById('retro4');
+    if (correctas === 4) {
+      retro.className = 'retro-box ok';
+      retro.innerHTML = '🎉 ¡Perfecto! Todas correctas: V, F, V, V. ¡Demostraste que aprendiste muy bien la lección!';
+    } else {
+      retro.className = 'retro-box mal';
+      retro.innerHTML = `❌ ${correctas} de 4 correctas. <strong>Recuerda:</strong> ${errMsg.join(' / ')} <button class="btn-intentar" onclick="reiniciarS4()">🔄 Intentar de nuevo</button>`;
+    }
+  }
+  function reiniciarS4() {
+    document.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('sel-v','sel-f','correcto-final','incorrecto-final'));
+    Object.keys(vfSeleccion).forEach(k => delete vfSeleccion[k]);
+    document.getElementById('retro4').className = 'retro-box';
+  }
+
+  // ── PROGRESO ──
+  function actualizarProgreso() {
+    let total = 10, llenos = 0;
+    if (document.getElementById('nombreEst').value.trim().length > 2) llenos++;
+    ['s1a','s1b','s1c','s1d'].forEach(id => { if (document.getElementById(id).value) llenos++; });
+    const sel2 = Object.values(s2sel).filter(Boolean).length;
+    if (sel2 >= 1) llenos++;
+    ['s3a','s3b','s3c','s3d'].forEach(id => { if (document.getElementById(id).value.trim().length > 1) llenos++; });
+    if (Object.keys(vfSeleccion).length >= 1) llenos++;
+    const pct = Math.round((llenos/total)*100);
+    document.getElementById('pFill').style.width = pct + '%';
+    const msg = pct===100?'🏆 ¡Todo completado!':pct>60?'🌟 ¡Casi listo!':pct>20?'💪 ¡Sigue así!':'🚀 ¡Empieza aquí!';
+    document.getElementById('pLabel').textContent = msg + '  ' + pct + '%';
   }
 
   // ── TOAST ──
   function mostrarToast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
+    t.textContent = msg; t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 3000);
   }
 
   // ── LIMPIAR ──
-  function limpiarFormulario() {
-    if (!confirm('¿Seguro que deseas borrar todo el contenido?')) return;
-    ['s1a','s1b','s1c','s1d','s2a','s2b','s2c','s2d',
-     's3a','s3b','s3c','s3d','s4a','s4b','s4c','s4d',
-     'nombreEstudiante','fechaEstudiante'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
+  function limpiar() {
+    if (!confirm('¿Seguro que deseas borrar todo?')) return;
+    ['s1a','s1b','s1c','s1d'].forEach(id => { document.getElementById(id).value=''; document.getElementById(id).className='enferm-select'; });
+    ['s3a','s3b','s3c','s3d','nombreEst','fechaEst'].forEach(id => document.getElementById(id).value='');
+    document.querySelectorAll('.op-img-btn').forEach(b => b.classList.remove('sel'));
+    document.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('sel-v','sel-f','correcto-final','incorrecto-final'));
+    [1,2,3,4].forEach(n => { document.getElementById('retro'+n).className='retro-box'; });
+    Object.keys(s2sel).forEach(k=>delete s2sel[k]);
+    Object.keys(vfSeleccion).forEach(k=>delete vfSeleccion[k]);
     actualizarProgreso();
     mostrarToast('🗑️ Formulario limpiado');
   }
 
-  // ── DESCARGA PNG con hidden div (fix textarea html2canvas) ──
-  function descargarActividad() {
-    const nombre = document.getElementById('nombreEstudiante').value.trim() || 'estudiante';
-    const fecha  = document.getElementById('fechaEstudiante').value.trim() || '';
+  // ── DESCARGA PNG ──
+  function descargar() {
+    const nombre = document.getElementById('nombreEst').value.trim() || 'estudiante';
+    const fecha = document.getElementById('fechaEst').value.trim() || '—';
 
-    // Construir div oculto con todo el contenido
+    // S1
+    const s1Labels = [['🔴 Virus','s1a'],['🟠 Bacteria','s1b'],['🟢 Hongo','s1c'],['🦟 Parásito','s1d']];
+    const s1Textos = { gripe:'🤧 Gripe / COVID-19', salmonelosis:'🍽️ Salmonelosis', pie:'🦶 Pie de atleta', malaria:'🦟 Malaria / Dengue', '':'—' };
+    const s1rows = s1Labels.map(([lbl,id]) => {
+      const val = document.getElementById(id).value;
+      const ok = val === s1correctas[id];
+      return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <span style="background:#db6015;color:white;font-size:11px;font-weight:800;padding:3px 8px;border-radius:20px;white-space:nowrap;">${lbl}</span>
+        <span style="font-size:13px;">→</span>
+        <div style="flex:1;border:1.5px solid ${ok?'#2e7d5e':'#993921'};border-radius:6px;padding:5px 10px;background:${ok?'#eafaf1':'#fff0ee'};font-size:12px;font-weight:700;color:${ok?'#1e7e48':'#993921'};">${s1Textos[val]||'—'} ${ok?'✔':val?'✘':''}</div>
+      </div>`;
+    }).join('');
+
+    // S2
+    const opTextos = { s2a:'💨 Por el aire', s2b:'🤝 Contacto directo', s2c:'🍽️ Comida/agua sucia', s2d:'🦟 Por mosquito', s2e:'☀️ Por el sol', s2f:'📺 Por televisión' };
+    const opCorrectas = ['s2a','s2b','s2c','s2d'];
+    const s2rows = Object.entries(opTextos).map(([k,txt]) => {
+      const sel = s2sel[k]; const esCorrecta = opCorrectas.includes(k);
+      const color = sel ? (esCorrecta ? '#2e7d5e' : '#993921') : '#aaa';
+      const bg = sel ? (esCorrecta ? '#eafaf1' : '#fff0ee') : 'white';
+      return `<div style="border:2px solid ${color};border-radius:8px;padding:5px 9px;font-size:11.5px;font-weight:700;color:${color};background:${bg};">${txt} ${sel?(esCorrecta?'✔':'✘'):''}</div>`;
+    }).join('');
+
+    // S3
+    const s3Hints = ['Lavarme las _____ con agua y jabón.','Usar _____ cuando alguien está enfermo.','Ponerme mis _____ para protegerme.','Si estoy enfermo, quedarme en _____ en casa.'];
+    const s3rows = ['s3a','s3b','s3c','s3d'].map((id,i) => {
+      const val = document.getElementById(id).value.trim();
+      const norm = val.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      const ok = s3correctas[id].some(r => norm.includes(r.normalize('NFD').replace(/[\u0300-\u036f]/g,'')));
+      return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <span style="background:#c49a00;color:white;font-size:11px;font-weight:800;padding:3px 8px;border-radius:20px;">${i+1}</span>
+        <div style="flex:1;border:1.5px solid ${val?(ok?'#2e7d5e':'#993921'):'#dde4ea'};border-radius:6px;padding:5px 10px;background:${val?(ok?'#eafaf1':'#fff0ee'):'white'};font-size:12px;font-weight:700;color:${val?(ok?'#1e7e48':'#993921'):'#aaa'};">${val||'—'} ${val?(ok?'✔':'✘'):''}</div>
+      </div>`;
+    }).join('');
+
+    // S4
+    const vfEnunciados = [['vf1','La gripe es causada por un virus.'],['vf2','Los antibióticos curan enfermedades de virus.'],['vf3','Lavarse las manos ayuda a prevenir enfermedades.'],['vf4','El dengue lo transmite un mosquito.']];
+    const vfrows = vfEnunciados.map(([k,txt]) => {
+      const resp = vfSeleccion[k]; const correcto = vfCorrect[k];
+      const ok = resp === correcto;
+      const color = resp ? (ok?'#2e7d5e':'#993921') : '#aaa';
+      const label = resp === 'v' ? '✔ Verdadero' : resp === 'f' ? '✘ Falso' : '—';
+      return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap;">
+        <span style="flex:1;font-size:12px;font-weight:700;color:#244b5a;">${txt}</span>
+        <span style="border:2px solid ${color};border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;color:${color};background:${resp?(ok?'#eafaf1':'#fff0ee'):'white'};">${label} ${resp&&ok?'✔':resp&&!ok?'✘':''}</span>
+      </div>`;
+    }).join('');
+
     const hc = document.getElementById('hiddenCapture');
-    hc.innerHTML = `
-      <div style="font-family:'Nunito','Segoe UI',sans-serif;background:white;padding:24px;">
-        <!-- ENCABEZADO -->
-        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #db6015;padding-bottom:10px;margin-bottom:16px;">
-          <div>
-            <div style="background:#db6015;color:white;font-size:9px;font-weight:800;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.8px;display:inline-block;margin-bottom:4px;">Ciencias Naturales · 4° Primaria · Lección 11</div>
-            <div style="font-family:'Fredoka One',cursive;color:#244b5a;font-size:17px;font-weight:bold;">Organizador Gráfico: Enfermedades Infecciosas</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span style="font-size:32px;">🦠</span>
-            <div style="font-size:10px;color:#aaa;font-weight:700;text-align:right;line-height:1.5;">Plan Regular 2026<br>Colegio Escolaris</div>
-          </div>
+    hc.innerHTML = `<div style="font-family:'Nunito','Segoe UI',sans-serif;background:white;padding:22px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #db6015;padding-bottom:10px;margin-bottom:14px;">
+        <div>
+          <div style="background:#db6015;color:white;font-size:9px;font-weight:800;padding:2px 10px;border-radius:20px;text-transform:uppercase;display:inline-block;margin-bottom:3px;">Ciencias Naturales · 4° Primaria · Lección 11</div>
+          <div style="font-size:16px;font-weight:800;color:#244b5a;">Organizador Gráfico: Enfermedades Infecciosas</div>
         </div>
-
-        <!-- DATOS -->
-        <div style="display:flex;gap:14px;margin-bottom:16px;">
-          <div style="flex:1;border:2px solid #dde4ea;border-radius:8px;padding:7px 12px;">
-            <div style="font-size:10px;font-weight:800;color:#244b5a;text-transform:uppercase;margin-bottom:2px;">Estudiante</div>
-            <div style="font-size:13px;font-weight:700;color:#244b5a;">${nombre || '—'}</div>
-          </div>
-          <div style="width:130px;border:2px solid #dde4ea;border-radius:8px;padding:7px 12px;">
-            <div style="font-size:10px;font-weight:800;color:#244b5a;text-transform:uppercase;margin-bottom:2px;">Fecha</div>
-            <div style="font-size:13px;font-weight:700;color:#244b5a;">${fecha || '—'}</div>
-          </div>
-          <div style="width:110px;border:2px solid #dde4ea;border-radius:8px;padding:7px 12px;">
-            <div style="font-size:10px;font-weight:800;color:#244b5a;text-transform:uppercase;margin-bottom:2px;">Grado</div>
-            <div style="font-size:13px;font-weight:700;color:#888;">4° Primaria</div>
-          </div>
-        </div>
-
-        <!-- CONCEPTO CENTRAL -->
-        <div style="background:#244b5a;border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:14px;margin-bottom:14px;">
-          <span style="font-size:32px;">🦠</span>
-          <div>
-            <div style="font-family:'Fredoka One',cursive;color:#f7be00;font-size:20px;">Enfermedades Infecciosas</div>
-            <div style="color:rgba(255,255,255,0.7);font-size:11px;font-weight:600;">Enfermedades causadas por microorganismos que pueden transmitirse de persona a persona</div>
-          </div>
-        </div>
-
-        <!-- GRID 4 SECCIONES -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          ${buildSeccionCapture(1,'#fff5ee','#db6015','¿Quiénes las causan?','Tipos de microorganismos','🔬','#db6015',['s1a','s1b','s1c','s1d'],['Virus →','Bacteria →','Hongo →','Parásito →'])}
-          ${buildSeccionCapture(2,'#eef7f1','#2e7d5e','¿Cómo se contagian?','Vías de transmisión','📡','#2e7d5e',['s2a','s2b','s2c','s2d'],['Vía 1:','Vía 2:','Vía 3:','Vía 4:'])}
-          ${buildSeccionCapture(3,'#fffbea','#c49a00','¿Cómo prevenirlas?','Medidas de prevención','🛡️','#c49a00',['s3a','s3b','s3c','s3d'],['Acción 1:','Acción 2:','Acción 3:','Acción 4:'])}
-          ${buildSeccionCapture(4,'#f0f4ff','#244b5a','Mi reflexión personal','Aplicación a mi vida','💭','#244b5a',['s4a','s4b','s4c','s4d'],['Diferencia prevención/tratamiento:','¿Por qué antibióticos no sirven vs virus?','Medida de prevención en casa:','¿Qué harías si familiar se enferma?'])}
-        </div>
-
-        <!-- FIRMA -->
-        <div style="margin-top:14px;padding-top:10px;border-top:2px solid #eee;display:flex;justify-content:space-between;align-items:center;">
-          <div style="font-size:10px;color:#aaa;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">SUSY RAMÍREZ · Coordinadora Académica · Colegio Escolaris · Plan Regular 2026</div>
-          <div style="background:#db6015;color:white;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">⭐ 4 puntos</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:28px;">🦠</span>
+          <div style="font-size:10px;color:#aaa;font-weight:700;text-align:right;line-height:1.5;">Plan Regular 2026<br>Colegio Escolaris</div>
         </div>
       </div>
-    `;
+      <div style="display:flex;gap:12px;margin-bottom:14px;">
+        <div style="flex:1;border:2px solid #dde4ea;border-radius:8px;padding:7px 12px;"><div style="font-size:10px;font-weight:800;color:#244b5a;text-transform:uppercase;margin-bottom:2px;">👤 Estudiante</div><div style="font-size:13px;font-weight:700;color:#244b5a;">${nombre}</div></div>
+        <div style="width:130px;border:2px solid #dde4ea;border-radius:8px;padding:7px 12px;"><div style="font-size:10px;font-weight:800;color:#244b5a;text-transform:uppercase;margin-bottom:2px;">📅 Fecha</div><div style="font-size:13px;font-weight:700;color:#244b5a;">${fecha}</div></div>
+        <div style="width:110px;border:2px solid #dde4ea;border-radius:8px;padding:7px 12px;"><div style="font-size:10px;font-weight:800;color:#244b5a;text-transform:uppercase;margin-bottom:2px;">🏫 Grado</div><div style="font-size:13px;font-weight:700;color:#aaa;">4° Primaria</div></div>
+      </div>
+      <div style="background:#244b5a;border-radius:12px;padding:11px 16px;display:flex;align-items:center;gap:12px;margin-bottom:13px;">
+        <span style="font-size:28px;">🦠</span>
+        <div><div style="font-size:18px;font-weight:800;color:#f7be00;">Enfermedades Infecciosas</div><div style="color:rgba(255,255,255,0.7);font-size:11px;font-weight:600;">Enfermedades causadas por microorganismos que pueden pasar de una persona a otra</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:#fff5ee;border:2px solid #db6015;border-radius:12px;padding:12px;"><div style="font-size:14px;font-weight:800;color:#db6015;margin-bottom:8px;">1 — ¿Qué las causa? 🔬</div>${s1rows}</div>
+        <div style="background:#eef7f1;border:2px solid #2e7d5e;border-radius:12px;padding:12px;"><div style="font-size:14px;font-weight:800;color:#2e7d5e;margin-bottom:8px;">2 — ¿Cómo se contagian? 📡</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">${s2rows}</div></div>
+        <div style="background:#fffbea;border:2px solid #c49a00;border-radius:12px;padding:12px;"><div style="font-size:14px;font-weight:800;color:#a07800;margin-bottom:8px;">3 — ¿Cómo cuidarme? 🛡️</div>${s3rows}</div>
+        <div style="background:#eef3ff;border:2px solid #244b5a;border-radius:12px;padding:12px;"><div style="font-size:14px;font-weight:800;color:#244b5a;margin-bottom:8px;">4 — ¿Verdadero o Falso? ✔️❌</div>${vfrows}</div>
+      </div>
+      <div style="margin-top:13px;padding-top:10px;border-top:2px solid #eee;display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-size:9px;color:#bbb;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">SUSY RAMÍREZ · Coordinadora Académica · Colegio Escolaris · Plan Regular 2026</div>
+        <div style="background:#db6015;color:white;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">⭐ 4 puntos</div>
+      </div>
+    </div>`;
 
     mostrarToast('⏳ Generando imagen...');
-
-    html2canvas(hc, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#ffffff',
-      logging: false
-    }).then(canvas => {
-      const link = document.createElement('a');
-      const nombreArchivo = 'Organizador_' + nombre.replace(/\s+/g,'_') + '_Enfermedades.png';
-      link.download = nombreArchivo;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      mostrarToast('✅ ¡Descargado correctamente!');
-      hc.innerHTML = '';
-    }).catch(err => {
-      mostrarToast('❌ Error al generar. Intenta de nuevo.');
-      hc.innerHTML = '';
-    });
+    html2canvas(hc, { scale:2, useCORS:true, backgroundColor:'#ffffff', logging:false })
+      .then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'Organizador_' + nombre.replace(/\s+/g,'_') + '_Enfermedades.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        mostrarToast('✅ ¡Guardado correctamente!');
+        hc.innerHTML = '';
+      })
+      .catch(() => { mostrarToast('❌ Error. Intenta de nuevo.'); hc.innerHTML=''; });
   }
 
-  function buildSeccionCapture(num, bg, color, titulo, subtitulo, icono, dotColor, ids, labels) {
-    const numColors = ['#db6015','#2e7d5e','#c49a00','#244b5a'];
-    const nc = numColors[num-1];
-    let filas = '';
-    ids.forEach((id, i) => {
-      const val = document.getElementById(id) ? document.getElementById(id).value.trim() : '';
-      const label = labels[i];
-      filas += `
-        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;">
-          <div style="width:9px;height:9px;border-radius:50%;background:${dotColor};margin-top:5px;flex-shrink:0;"></div>
-          <div style="flex:1;border:1.5px solid #dde4ea;border-radius:6px;padding:6px 10px;background:white;min-height:30px;">
-            ${val
-              ? `<div style="font-size:12px;font-weight:700;color:#244b5a;white-space:pre-wrap;word-break:break-word;">${val}</div>`
-              : `<div style="font-size:11px;color:#b0bec5;font-style:italic;">${label}</div>`}
-          </div>
-        </div>`;
-    });
-    return `
-      <div style="background:${bg};border:2px solid ${color};border-radius:12px;padding:12px;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-          <div style="width:26px;height:26px;border-radius:50%;background:${nc};display:flex;align-items:center;justify-content:center;color:white;font-size:14px;font-weight:bold;flex-shrink:0;">${num}</div>
-          <div>
-            <div style="font-size:13px;font-weight:800;color:${color};">${titulo}</div>
-            <div style="font-size:10px;font-weight:700;color:#888;">${subtitulo}</div>
-          </div>
-        </div>
-        ${filas}
-      </div>`;
-  }
-
-  // Init
   actualizarProgreso();
 </script>
 </body>
