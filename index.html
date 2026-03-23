@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organizador Gráfico – Enfermedades Infecciosas</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap');
+
+  :root {
+    --naranja: #db6015;
+    --amarillo: #f7be00;
+    --azul-oscuro: #244b5a;
+    --rojo: #993921;
+    --azul-claro: #f0f8ff;
+    --verde: #2e7d5e;
+    --morado: #5c3d8f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', 'Segoe UI', Tahoma, sans-serif;
+    background: var(--azul-claro);
+    padding: 16px;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--azul-oscuro);
+    border-radius: 16px;
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .header-left { display: flex; flex-direction: column; gap: 2px; }
+  .header-badge {
+    background: var(--naranja);
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+  .header h1 {
+    font-family: 'Fredoka One', cursive;
+    color: var(--amarillo);
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .puntos-badge {
+    background: var(--amarillo);
+    color: var(--azul-oscuro);
+    font-weight: 900;
+    font-size: 13px;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+  .header-sub {
+    color: rgba(255,255,255,0.65);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* ── INSTRUCCIONES ── */
+  .instrucciones {
+    background: white;
+    border-left: 5px solid var(--naranja);
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 16px;
+    font-size: 13.5px;
+    color: var(--azul-oscuro);
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  .instrucciones span { color: var(--naranja); }
+
+  /* ── CAPTURE AREA ── */
+  #captureArea {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  /* ── WATERMARK HEADER inside capture ── */
+  .capture-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--naranja);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .capture-header h2 {
+    font-family: 'Fredoka One', cursive;
+    color: var(--azul-oscuro);
+    font-size: 17px;
+  }
+  .capture-header .meta {
+    font-size: 11px;
+    color: #888;
+    font-weight: 700;
+    text-align: right;
+    line-height: 1.5;
+  }
+  .capture-header .emoji-big { font-size: 32px; }
+
+  /* ── NOMBRE FIELD ── */
+  .nombre-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .campo-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 180px;
+  }
+  .campo-label label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--azul-oscuro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .campo-label input {
+    border: 2px solid #dde4ea;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--azul-oscuro);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .campo-label input:focus { border-color: var(--naranja); }
+
+  /* ── GRID DE SECCIONES ── */
+  .organizer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* ── SECCIÓN CARD ── */
+  .seccion {
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 2px solid transparent;
+  }
+  .seccion-1 { background: #fff5ee; border-color: var(--naranja); }
+  .seccion-2 { background: #eef7f1; border-color: var(--verde); }
+  .seccion-3 { background: #fffbea; border-color: var(--amarillo); }
+  .seccion-4 { background: #f0f4ff; border-color: var(--azul-oscuro); }
+
+  .seccion-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .seccion-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 15px;
+    color: white;
+    flex-shrink: 0;
+  }
+  .n1 { background: var(--naranja); }
+  .n2 { background: var(--verde); }
+  .n3 { background: #c49a00; }
+  .n4 { background: var(--azul-oscuro); }
+
+  .seccion-titulo h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .c1 h3 { color: var(--naranja); }
+  .c2 h3 { color: var(--verde); }
+  .c3 h3 { color: #a07800; }
+  .c4 h3 { color: var(--azul-oscuro); }
+
+  .seccion-pregunta {
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+    line-height: 1.4;
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 6px;
+  }
+
+  /* ── PUNTOS DENTRO DE CADA SECCIÓN ── */
+  .punto-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .punto-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-top: 10px;
+    flex-shrink: 0;
+  }
+  .d1 { background: var(--naranja); }
+  .d2 { background: var(--verde); }
+  .d3 { background: #c49a00; }
+  .d4 { background: var(--azul-oscuro); }
+
+  .punto-row textarea {
+    flex: 1;
+    border: 1.5px solid #dde4ea;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--azul-oscuro);
+    resize: none;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.4;
+    min-height: 38px;
+    background: white;
+  }
+  .punto-row textarea:focus { border-color: var(--naranja); }
+  .punto-row textarea::placeholder { color: #b0bec5; font-style: italic; }
+
+  /* ── SECCIÓN ESPECIAL: MAPA CENTRAL ── */
+  .centro-concepto {
+    grid-column: 1 / -1;
+    background: var(--azul-oscuro);
+    border-radius: 14px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 2px;
+  }
+  .centro-concepto .emoji { font-size: 36px; }
+  .centro-concepto h2 {
+    font-family: 'Fredoka One', cursive;
+    color: var(--amarillo);
+    font-size: 22px;
+  }
+  .centro-concepto p {
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* ── HIDDEN CAPTURE DIV ── */
+  #hiddenCapture {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    width: 900px;
+    background: white;
+    padding: 24px;
+    font-family: 'Nunito', 'Segoe UI', sans-serif;
+    z-index: -1;
+  }
+
+  /* ── FOOTER BUTTONS ── */
+  .footer-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-descargar {
+    background: var(--naranja);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 14px rgba(219,96,21,0.3);
+  }
+  .btn-descargar:hover { background: var(--rojo); transform: translateY(-2px); }
+  .btn-limpiar {
+    background: white;
+    color: var(--azul-oscuro);
+    border: 2px solid var(--azul-oscuro);
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-limpiar:hover { background: var(--azul-oscuro); color: white; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--azul-oscuro);
+    color: var(--amarillo);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 12px 22px;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+    z-index: 999;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  /* ── PROGRESS ── */
+  .progreso-barra {
+    height: 6px;
+    background: #e0e7ef;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .progreso-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--naranja), var(--amarillo));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progreso-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #888;
+    text-align: right;
+    margin-top: -14px;
+    margin-bottom: 10px;
+  }
+
+  /* ── FIRMA ── */
+  .firma-capture {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 2px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .firma-capture .colegio {
+    font-size: 10px;
+    color: #aaa;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .firma-capture .puntos-total {
+    background: var(--naranja);
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="header-badge">📋 Actividad · 4° Primaria · Ciencias Naturales</div>
+    <h1>Organizador Gráfico<br>Enfermedades Infecciosas</h1>
+  </div>
+  <div class="header-right">
+    <div class="puntos-badge">⭐ Vale 4 puntos</div>
+    <div class="header-sub">Lección 11 · Plan Regular 2026</div>
+  </div>
+</div>
+
+<!-- INSTRUCCIONES -->
+<div class="instrucciones">
+  📌 <span>Instrucciones:</span> Completa los cuatro apartados del organizador con tus propias palabras. Cada sección vale <span>1 punto</span>. Cuando termines, presiona <span>"Descargar mi actividad"</span> para guardar tu trabajo como imagen.
+</div>
+
+<!-- BARRA DE PROGRESO -->
+<div class="progreso-barra"><div class="progreso-fill" id="progresoFill"></div></div>
+<div class="progreso-label" id="progresoLabel">0 / 8 campos completados</div>
+
+<!-- ÁREA CAPTURADA -->
+<div id="captureArea">
+
+  <div class="capture-header">
+    <div>
+      <div class="header-badge" style="background:var(--naranja);color:white;font-size:9px;font-weight:800;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.8px;display:inline-block;margin-bottom:4px;">Ciencias Naturales · 4° Primaria · Lección 11</div>
+      <h2>Organizador Gráfico: Enfermedades Infecciosas</h2>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="emoji-big">🦠</span>
+      <div class="meta">Plan Regular 2026<br>Colegio Escolaris</div>
+    </div>
+  </div>
+
+  <!-- NOMBRE / FECHA -->
+  <div class="nombre-row">
+    <div class="campo-label">
+      <label>Nombre del estudiante</label>
+      <input type="text" id="nombreEstudiante" placeholder="Escribe tu nombre completo..." oninput="actualizarProgreso()">
+    </div>
+    <div class="campo-label" style="max-width:160px;">
+      <label>Fecha</label>
+      <input type="text" id="fechaEstudiante" placeholder="dd/mm/aaaa" oninput="actualizarProgreso()">
+    </div>
+    <div class="campo-label" style="max-width:130px;">
+      <label>Grado</label>
+      <input type="text" id="gradoEstudiante" value="4° Primaria" readonly style="background:#f0f8ff;color:#888;">
+    </div>
+  </div>
+
+  <!-- CONCEPTO CENTRAL -->
+  <div class="centro-concepto">
+    <div class="emoji">🦠</div>
+    <div>
+      <h2>Enfermedades Infecciosas</h2>
+      <p>Enfermedades causadas por microorganismos que pueden transmitirse de persona a persona</p>
+    </div>
+  </div>
+
+  <!-- GRID 4 SECCIONES -->
+  <div class="organizer-grid">
+
+    <!-- SECCIÓN 1: ¿Qué las causa? -->
+    <div class="seccion seccion-1">
+      <div class="seccion-titulo c1">
+        <div class="seccion-num n1">1</div>
+        <h3>¿Quiénes las causan?<br><small style="font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;color:#888;">Tipos de microorganismos</small></h3>
+      </div>
+      <div class="seccion-pregunta">🔬 Menciona los 4 tipos de microorganismos que causan enfermedades infecciosas y escribe un ejemplo de cada uno.</div>
+      <div class="punto-row">
+        <div class="punto-dot d1"></div>
+        <textarea id="s1a" placeholder="Virus → ejemplo: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d1"></div>
+        <textarea id="s1b" placeholder="Bacteria → ejemplo: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d1"></div>
+        <textarea id="s1c" placeholder="Hongo → ejemplo: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d1"></div>
+        <textarea id="s1d" placeholder="Parásito → ejemplo: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2: Formas de contagio -->
+    <div class="seccion seccion-2">
+      <div class="seccion-titulo c2">
+        <div class="seccion-num n2">2</div>
+        <h3>¿Cómo se contagian?<br><small style="font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;color:#888;">Vías de transmisión</small></h3>
+      </div>
+      <div class="seccion-pregunta">📡 Escribe las 4 formas en que las enfermedades infecciosas pueden transmitirse de una persona a otra.</div>
+      <div class="punto-row">
+        <div class="punto-dot d2"></div>
+        <textarea id="s2a" placeholder="Vía 1: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d2"></div>
+        <textarea id="s2b" placeholder="Vía 2: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d2"></div>
+        <textarea id="s2c" placeholder="Vía 3: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d2"></div>
+        <textarea id="s2d" placeholder="Vía 4: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 3: Prevención -->
+    <div class="seccion seccion-3">
+      <div class="seccion-titulo c3">
+        <div class="seccion-num n3">3</div>
+        <h3>¿Cómo prevenirlas?<br><small style="font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;color:#888;">Medidas de prevención</small></h3>
+      </div>
+      <div class="seccion-pregunta">🛡️ Escribe 4 acciones que puedes hacer ANTES de enfermarte para protegerte de enfermedades infecciosas.</div>
+      <div class="punto-row">
+        <div class="punto-dot d3"></div>
+        <textarea id="s3a" placeholder="Acción 1: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d3"></div>
+        <textarea id="s3b" placeholder="Acción 2: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d3"></div>
+        <textarea id="s3c" placeholder="Acción 3: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d3"></div>
+        <textarea id="s3d" placeholder="Acción 4: ..." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 4: Reflexión personal -->
+    <div class="seccion seccion-4">
+      <div class="seccion-titulo c4">
+        <div class="seccion-num n4">4</div>
+        <h3>Mi reflexión personal<br><small style="font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;color:#888;">Aplicación a mi vida</small></h3>
+      </div>
+      <div class="seccion-pregunta">💭 Responde con tus propias palabras estas preguntas de reflexión.</div>
+      <div class="punto-row">
+        <div class="punto-dot d4"></div>
+        <textarea id="s4a" placeholder="¿Qué diferencia hay entre prevención y tratamiento?" rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d4"></div>
+        <textarea id="s4b" placeholder="¿Por qué los antibióticos no sirven para curar un virus?" rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d4"></div>
+        <textarea id="s4c" placeholder="Menciona una medida de prevención que ya practicas en casa." rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+      <div class="punto-row">
+        <div class="punto-dot d4"></div>
+        <textarea id="s4d" placeholder="¿Qué harías si un familiar cercano se enferma de gripe?" rows="2" oninput="actualizarProgreso()"></textarea>
+      </div>
+    </div>
+
+  </div><!-- end grid -->
+
+  <!-- FIRMA -->
+  <div class="firma-capture">
+    <div class="colegio">SUSY RAMÍREZ · Coordinadora Académica · Colegio Escolaris · Plan Regular 2026</div>
+    <div class="puntos-total">⭐ 4 puntos</div>
+  </div>
+
+</div><!-- end captureArea -->
+
+<!-- HIDDEN CAPTURE -->
+<div id="hiddenCapture"></div>
+
+<!-- BOTONES -->
+<div class="footer-btns">
+  <button class="btn-descargar" onclick="descargarActividad()">
+    📥 Descargar mi actividad
+  </button>
+  <button class="btn-limpiar" onclick="limpiarFormulario()">
+    🗑️ Limpiar todo
+  </button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── PROGRESO ──
+  const camposIds = ['nombreEstudiante','fechaEstudiante',
+    's1a','s1b','s1c','s1d',
+    's2a','s2b','s2c','s2d',
+    's3a','s3b','s3c','s3d',
+    's4a','s4b','s4c','s4d'];
+  const totalCampos = camposIds.length;
+
+  function actualizarProgreso() {
+    let llenos = 0;
+    camposIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value.trim().length > 2) llenos++;
+    });
+    const pct = Math.round((llenos / totalCampos) * 100);
+    document.getElementById('progresoFill').style.width = pct + '%';
+    document.getElementById('progresoLabel').textContent = llenos + ' / ' + totalCampos + ' campos completados (' + pct + '%)';
+  }
+
+  // ── TOAST ──
+  function mostrarToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ── LIMPIAR ──
+  function limpiarFormulario() {
+    if (!confirm('¿Seguro que deseas borrar todo el contenido?')) return;
+    ['s1a','s1b','s1c','s1d','s2a','s2b','s2c','s2d',
+     's3a','s3b','s3c','s3d','s4a','s4b','s4c','s4d',
+     'nombreEstudiante','fechaEstudiante'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    actualizarProgreso();
+    mostrarToast('🗑️ Formulario limpiado');
+  }
+
+  // ── DESCARGA PNG con hidden div (fix textarea html2canvas) ──
+  function descargarActividad() {
+    const nombre = document.getElementById('nombreEstudiante').value.trim() || 'estudiante';
+    const fecha  = document.getElementById('fechaEstudiante').value.trim() || '';
+
+    // Construir div oculto con todo el contenido
+    const hc = document.getElementById('hiddenCapture');
+    hc.innerHTML = `
+      <div style="font-family:'Nunito','Segoe UI',sans-serif;background:white;padding:24px;">
+        <!-- ENCABEZADO -->
+        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #db6015;padding-bottom:10px;margin-bottom:16px;">
+          <div>
+            <div style="background:#db6015;color:white;font-size:9px;font-weight:800;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.8px;display:inline-block;margin-bottom:4px;">Ciencias Naturales · 4° Primaria · Lección 11</div>
+            <div style="font-family:'Fredoka One',cursive;color:#244b5a;font-size:17px;font-weight:bold;">Organizador Gráfico: Enfermedades Infecciosas</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:32px;">🦠</span>
+            <div style="font-size:10px;color:#aaa;font-weight:700;text-align:right;line-height:1.5;">Plan Regular 2026<br>Colegio Escolaris</div>
+          </div>
+        </div>
+
+        <!-- DATOS -->
+        <div style="display:flex;gap:14px;margin-bottom:16px;">
+          <div style="flex:1;border:2px solid #dde4ea;border-radius:8px;padding:7px 12px;">
+            <div style="font-size:10px;font-weight:800;color:#244b5a;text-transform:uppercase;margin-bottom:2px;">Estudiante</div>
+            <div style="font-size:13px;font-weight:700;color:#244b5a;">${nombre || '—'}</div>
+          </div>
+          <div style="width:130px;border:2px solid #dde4ea;border-radius:8px;padding:7px 12px;">
+            <div style="font-size:10px;font-weight:800;color:#244b5a;text-transform:uppercase;margin-bottom:2px;">Fecha</div>
+            <div style="font-size:13px;font-weight:700;color:#244b5a;">${fecha || '—'}</div>
+          </div>
+          <div style="width:110px;border:2px solid #dde4ea;border-radius:8px;padding:7px 12px;">
+            <div style="font-size:10px;font-weight:800;color:#244b5a;text-transform:uppercase;margin-bottom:2px;">Grado</div>
+            <div style="font-size:13px;font-weight:700;color:#888;">4° Primaria</div>
+          </div>
+        </div>
+
+        <!-- CONCEPTO CENTRAL -->
+        <div style="background:#244b5a;border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+          <span style="font-size:32px;">🦠</span>
+          <div>
+            <div style="font-family:'Fredoka One',cursive;color:#f7be00;font-size:20px;">Enfermedades Infecciosas</div>
+            <div style="color:rgba(255,255,255,0.7);font-size:11px;font-weight:600;">Enfermedades causadas por microorganismos que pueden transmitirse de persona a persona</div>
+          </div>
+        </div>
+
+        <!-- GRID 4 SECCIONES -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          ${buildSeccionCapture(1,'#fff5ee','#db6015','¿Quiénes las causan?','Tipos de microorganismos','🔬','#db6015',['s1a','s1b','s1c','s1d'],['Virus →','Bacteria →','Hongo →','Parásito →'])}
+          ${buildSeccionCapture(2,'#eef7f1','#2e7d5e','¿Cómo se contagian?','Vías de transmisión','📡','#2e7d5e',['s2a','s2b','s2c','s2d'],['Vía 1:','Vía 2:','Vía 3:','Vía 4:'])}
+          ${buildSeccionCapture(3,'#fffbea','#c49a00','¿Cómo prevenirlas?','Medidas de prevención','🛡️','#c49a00',['s3a','s3b','s3c','s3d'],['Acción 1:','Acción 2:','Acción 3:','Acción 4:'])}
+          ${buildSeccionCapture(4,'#f0f4ff','#244b5a','Mi reflexión personal','Aplicación a mi vida','💭','#244b5a',['s4a','s4b','s4c','s4d'],['Diferencia prevención/tratamiento:','¿Por qué antibióticos no sirven vs virus?','Medida de prevención en casa:','¿Qué harías si familiar se enferma?'])}
+        </div>
+
+        <!-- FIRMA -->
+        <div style="margin-top:14px;padding-top:10px;border-top:2px solid #eee;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:10px;color:#aaa;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">SUSY RAMÍREZ · Coordinadora Académica · Colegio Escolaris · Plan Regular 2026</div>
+          <div style="background:#db6015;color:white;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">⭐ 4 puntos</div>
+        </div>
+      </div>
+    `;
+
+    mostrarToast('⏳ Generando imagen...');
+
+    html2canvas(hc, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      logging: false
+    }).then(canvas => {
+      const link = document.createElement('a');
+      const nombreArchivo = 'Organizador_' + nombre.replace(/\s+/g,'_') + '_Enfermedades.png';
+      link.download = nombreArchivo;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      mostrarToast('✅ ¡Descargado correctamente!');
+      hc.innerHTML = '';
+    }).catch(err => {
+      mostrarToast('❌ Error al generar. Intenta de nuevo.');
+      hc.innerHTML = '';
+    });
+  }
+
+  function buildSeccionCapture(num, bg, color, titulo, subtitulo, icono, dotColor, ids, labels) {
+    const numColors = ['#db6015','#2e7d5e','#c49a00','#244b5a'];
+    const nc = numColors[num-1];
+    let filas = '';
+    ids.forEach((id, i) => {
+      const val = document.getElementById(id) ? document.getElementById(id).value.trim() : '';
+      const label = labels[i];
+      filas += `
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;">
+          <div style="width:9px;height:9px;border-radius:50%;background:${dotColor};margin-top:5px;flex-shrink:0;"></div>
+          <div style="flex:1;border:1.5px solid #dde4ea;border-radius:6px;padding:6px 10px;background:white;min-height:30px;">
+            ${val
+              ? `<div style="font-size:12px;font-weight:700;color:#244b5a;white-space:pre-wrap;word-break:break-word;">${val}</div>`
+              : `<div style="font-size:11px;color:#b0bec5;font-style:italic;">${label}</div>`}
+          </div>
+        </div>`;
+    });
+    return `
+      <div style="background:${bg};border:2px solid ${color};border-radius:12px;padding:12px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:26px;height:26px;border-radius:50%;background:${nc};display:flex;align-items:center;justify-content:center;color:white;font-size:14px;font-weight:bold;flex-shrink:0;">${num}</div>
+          <div>
+            <div style="font-size:13px;font-weight:800;color:${color};">${titulo}</div>
+            <div style="font-size:10px;font-weight:700;color:#888;">${subtitulo}</div>
+          </div>
+        </div>
+        ${filas}
+      </div>`;
+  }
+
+  // Init
+  actualizarProgreso();
+</script>
+</body>
+</html>
